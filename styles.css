@@ -1,0 +1,269 @@
+* {
+    font-family: "Inter", sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+
+:root {
+    /* darkmode colors */
+    --grey-100: #121212;
+    --grey-90: #2E2E2F;
+    --grey-80: #4B4B4B;
+    --grey-70: #787878;
+    --grey-60: #A5A5A5;
+    --grey-50: #dfdddd;
+    --grey-40: #E5E7EB;
+    --white: #fff;
+}
+
+/* utility classes */
+
+.flex {
+    display: flex;
+}
+
+/* header area */
+
+header {
+    display: flex;
+    min-height: 13rem;
+    background-image: url(./assets/banner.png);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-color: #2E2E2F;
+    padding: 1rem 3rem;
+    align-items: center;
+    overflow: hidden;
+}
+
+.title-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+h1 {
+    color: var(--white);
+    text-align: justify;
+    font-size: 2.67469rem;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 1.48594rem;
+    letter-spacing: -0.12038rem;
+}
+
+.title-container a {
+    color: var(--white);
+    text-align: right;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.25rem;
+    text-decoration: none;
+    /* 142.857% */
+}
+
+.title-container a:hover {
+    text-decoration: underline;
+}
+
+form {
+    position: absolute;
+    top: 188px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 462px;
+    z-index: 1000;
+}
+
+form input {
+    width: 100%;
+    display: flex;
+    padding: 0.5625rem 0.8125rem 0.5625rem 2.25rem;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1 0 0;
+    color: var(--gray-500, #6B7280);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem;
+    border-radius: 0.375rem 0 0 0.375rem;
+    border: 1px solid var(--gray-300, #D1D5DB);
+    background: var(--white, #FFF);
+    min-width: 342px;
+    background-image: url('./assets/search.png'); /* Your icon URL here */
+    background-position: left 10px center; /* Positioning the icon inside the input */
+    background-repeat: no-repeat;
+}
+
+
+
+form input:focus {
+    border-color: #4B4B4B;
+}
+
+form button {
+    color: var(--gray-700, #374151);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem;
+    padding: 0 2rem;
+    border-radius: 0rem 0.375rem 0.375rem 0rem;
+    border: 1px solid var(--gray-300, #D1D5DB);
+    background: var(--gray-50, #F9FAFB);
+    border-left: none;
+}
+
+
+
+/* results-container */
+
+section {
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+#startImage {
+    display: none;
+    max-width: 9rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#errorMessageSearch {
+    display: none;
+    max-width: 20rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--grey-50);
+    text-align: center;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.25rem;
+
+}
+
+#resultsContainer,
+#watchlistContainer {
+    padding: 4rem 2.75rem 0 2.75rem;
+}
+
+
+
+
+/* styles of the outputted movies */
+
+article {
+    gap: 1.5rem;
+    padding: 1.25rem 0;
+    border-bottom: 1.5px solid var(--grey-40)
+}
+
+article:last-of-type {
+    border-bottom: none;
+}
+
+article img {
+    border-radius: 2px;
+}
+
+article .title {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+article .title .classMovieTitle {
+    color: var(--grey-100);
+    text-align: justify;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1.25rem;
+}
+
+article .rating {
+    gap: 0.25rem;
+    align-items: center;
+}
+
+article .ratingValue {
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+article .star {
+    width: 1rem;
+    height: 1rem;
+}
+
+article .shortInfo {
+    justify-content: space-between;
+    color: var(--grey-80);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+article .infoContainer {
+    gap: 1rem;
+}
+
+
+article .description {
+    color: #6B7280;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.25rem;
+    /* 142.857% */
+}
+
+article .button {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+article .button img {
+    width: 1rem;
+    height: 1rem;
+}
+
+/* List page */
+
+#watchlistContainer {
+    height: 100vh;
+    position: relative;
+}
+
+
+#emptyMessage {
+    display: none;
+    max-width: 20rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--grey-50);
+    text-align: center;
+    font-size: 1.125rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 1.25rem;
+}
