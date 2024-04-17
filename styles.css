@@ -132,7 +132,7 @@ section {
 }
 
 #startImage {
-    display: none;
+    display: block;
     max-width: 9rem;
     position: absolute;
     top: 50%;
@@ -169,7 +169,9 @@ section {
 article {
     gap: 1.5rem;
     padding: 1.25rem 0;
-    border-bottom: 1.5px solid var(--grey-40)
+    border-bottom: 1.5px solid var(--grey-40);
+    align-items: center;
+    width: 100%;
 }
 
 article:last-of-type {
@@ -178,6 +180,7 @@ article:last-of-type {
 
 article img {
     border-radius: 2px;
+    max-width: 148px;
 }
 
 article .title {
@@ -186,7 +189,7 @@ article .title {
     margin-bottom: 0.75rem;
 }
 
-article .title .classMovieTitle {
+article .title .movieTitle {
     color: var(--grey-100);
     text-align: justify;
     font-size: 1.125rem;
@@ -220,8 +223,9 @@ article .shortInfo {
     margin-bottom: 0.5rem;
 }
 
-article .infoContainer {
+article .informationContainer {
     gap: 1rem;
+    width: 100%;
 }
 
 
