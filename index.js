@@ -2,6 +2,12 @@ const searchButton = document.getElementById("searchButton")
 const userSearch = document.getElementById("userSearch")
 const startImage = document.getElementById("startImage")
 const resultsContainer = document.getElementById("resultsContainer")
+const titleButtons = document.querySelectorAll(".titleButton")
+const watchlistButton = document.getElementById("watchlistButton")
+const watchlistContainer = document.getElementById("watchlistContainer")
+
+// empty variable for saving search results
+let watchlist = {}
 
 const errorMessageSearch = document.getElementById("errorMessageSearch")
 
@@ -13,7 +19,7 @@ let response
 let data
 
 async function handleSearch(event) {
-  event.preventDefault() 
+  event.preventDefault()
   clearResults()
   startImage.style.display = "none"
   //updating the variables for the response
@@ -22,7 +28,8 @@ async function handleSearch(event) {
   console.log(data)
   // building the search results
   buildResults(data)
-} 
+
+}
 
 async function buildResults(data) {
   console.log(data);
@@ -84,17 +91,19 @@ async function buildResults(data) {
 
     const genre = document.createElement("p");
     genre.classList.add("genre");
-    genre.textContent = movieDetails.Genre;  
+    genre.textContent = movieDetails.Genre;
     infoContainer.appendChild(genre);
 
     const buttonContainer = document.createElement("div");
-    buttonContainer.classList.add("button");
+    buttonContainer.classList.add("buttonContainer");
     shortInfo.appendChild(buttonContainer);
 
     const watchlistButton = document.createElement("img");
     watchlistButton.src = "./assets/add.png";
     watchlistButton.alt = "Add to Watchlist";
+    watchlistButton.classList.add("watchlistButton"); // Important: add a class for specific targeting
     buttonContainer.appendChild(watchlistButton);
+
 
     const watchlistText = document.createElement("p");
     watchlistText.textContent = "Watchlist";
@@ -104,7 +113,13 @@ async function buildResults(data) {
     description.classList.add("description");
     description.textContent = movieDetails.Plot;
     movieInfo.appendChild(description);
+
+    buttonContainer.addEventListener("click", (event) => handleClick(event, searchResults[i], watchlistButton));
+
   }
+
+
+
 }
 
 // helper function to get additional IMDB movie details
@@ -126,9 +141,58 @@ async function fetchMovieDetails(imdbID) {
 
 function clearResults() {
   const resultsContainer = document.getElementById('resultsContainer');
-      const articles = resultsContainer.querySelectorAll('article');
-      articles.forEach(article => {
-          article.remove(); 
-      });
- } 
+  const articles = resultsContainer.querySelectorAll('article');
+  articles.forEach(article => {
+    article.remove();
+  });
+}
 
+
+function handleClick(event, movieData, watchlistButton) {
+  event.preventDefault();
+
+  const movieId = movieData.imdbID;
+  const container = watchlistButton.parentNode;
+  const watchlistText = container.querySelector('p');
+
+  if (!watchlistButton || watchlistButton.nodeName !== "IMG") {
+    console.error("Invalid or missing watchlist button.", watchlistButton);
+    return;
+  }
+
+  if (!watchlist[movieId]) {
+    watchlist[movieId] = movieData;
+    watchlistButton.src = "./assets/remove.png";
+    watchlistText.textContent = "Remove";
+    console.log("Added to watchlist:", movieData.Title);
+  } else {
+    delete watchlist[movieId];
+    watchlistButton.src = "./assets/add.png";
+    watchlistText.textContent = "Watchlist";
+    console.log("Removed from watchlist:", movieData.Title);
+  }
+
+  // Save to local storage after any change
+  localStorage.setItem('myWatchlist', JSON.stringify(watchlist));
+}
+
+
+function addToWatchlist(movie) {
+  // Assuming the movie ID is unique and can be used as a key
+  if (!watchlist[movie.imdbID]) {
+    watchlist[movie.imdbID] = movie;
+    console.log(watchlist);
+  } else {
+    console.log("Movie already in watchlist");
+  }
+}
+
+
+
+// building the watchlist 
+
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.location.pathname.endsWith('list.html')) {
+      console.log("I am on the watchlist page");
+  }
+});
